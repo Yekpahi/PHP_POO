@@ -3,21 +3,30 @@ declare(strict_types=1);
 
 class Pont 
 {
-    public static int $nombrepietons = 0;
+   private const UNITE =  'm²';
+   private float $longueur = 12;
+   private float $largeur = 4;
 
-    public function nouveauPieton()
-    {
-        self::$nombrepietons++;
-    }
+   public function getSurface() : string
+   {
+    return ($this->largeur *  $this->longueur).self::UNITE;
+   }
+
+   public function setLongueur(float $longueur) 
+   {
+    $this->longueur = $longueur;
+   }
+
+   public function setLargeur(float $largeur) 
+   {
+    $this->largeur = $largeur;
+   }
+
 }
 
-$pontLondre = new Pont();
-$pontLondre->nouveauPieton();
+$towerBridge = new Pont;
+$towerBridge->setLongueur(286.0);
+$towerBridge->setLargeur(15.0);
 
-$pontParis = new Pont();
-$pontParis->nouveauPieton();
+echo $towerBridge->getSurface();
 
-$pontZou = new Pont();
-$pontZou->nouveauPieton();
-
-echo "Nombre de pont : " .Pont::$nombrepietons;
