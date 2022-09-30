@@ -1,32 +1,30 @@
 <?php
 declare(strict_types=1);
 
-class Pont 
+require 'saveclass.php';
+class BankAccount 
 {
-   private const UNITE =  'm²';
-   private float $longueur = 12;
-   private float $largeur = 4;
+   private $balance;
 
-   public function getSurface() : string
+
+   public function getBalance() 
    {
-    return ($this->largeur *  $this->longueur).self::UNITE;
+      return $this->balance;
    }
 
-   public function setLongueur(float $longueur) 
+   public function deposit($amount)
    {
-    $this->longueur = $longueur;
+      if ($amount > 0) {
+         $this->balance += $amount;
+      }
+      return $this;
    }
-
-   public function setLargeur(float $largeur) 
-   {
-    $this->largeur = $largeur;
-   }
-
 }
 
-$towerBridge = new Pont;
-$towerBridge->setLongueur(286.0);
-$towerBridge->setLargeur(15.0);
 
-echo $towerBridge->getSurface();
-
+$account = new SaveClass();
+$account->deposit(100);
+// set interest rate
+$account->setInterestRate(0.05);
+$account->addInterest();
+echo $account->getBalance();
