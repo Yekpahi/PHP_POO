@@ -1,30 +1,26 @@
-<?php
-declare(strict_types=1);
+<?php 
+require 'src/Model/Customer.php';
+require 'src/Model/Product.php';
+require 'src/Utils/Logger.php';
+require 'src/Database/Logger.php';
+//use Store\Model\Customer;
+use Store\Model\{Customer, Product};
+use Store\Utils\Logger;
+use Store\Database\Logger as DatabaseLogger;
 
-require 'saveclass.php';
-class BankAccount 
-{
-   private $balance;
+$loggers = [
+    new Logger(),
+    new DatabaseLogger()
+];
 
+$customer = new Customer('Bob');
 
-   public function getBalance() 
-   {
-      return $this->balance;
-   }
+echo $customer->getName();
 
-   public function deposit($amount)
-   {
-      if ($amount > 0) {
-         $this->balance += $amount;
-      }
-      return $this;
-   }
-}
+$product = new Product();
 
+$lg1 = new DatabaseLogger();
+$lg1->log(" / Here DB /");
 
-$account = new SaveClass();
-$account->deposit(100);
-// set interest rate
-$account->setInterestRate(0.05);
-$account->addInterest();
-echo $account->getBalance();
+$lg2 = new Logger();
+$lg2->log("Here Utils");
